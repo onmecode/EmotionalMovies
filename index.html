@@ -1,0 +1,354 @@
+
+<html>
+    <head>
+       <title>moodslider</title>
+
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="homecss.css" rel="stylesheet" type="text/css"/>
+        <link href="SlidersController.js">
+</head>
+<body>
+   
+    <span id="date"></span>
+        <div id="page">
+       
+
+            
+        <h1><div align="center">Academy Test 
+             <div id="logo">
+                 <img src="images/sky_logo.jpg" alt="BelieveinBetter" width="150" height="150"/>
+            </div>
+            HOME PAGE
+            </div></h1>
+
+
+         <div align="left"> 
+            
+        <ul id="navigation">
+            
+                
+    <li><a href="index.html" target="_blank">MoodSlider </a></li>
+    <li><a href="uploadpage.php" target="_blank">Upload</a></li>
+        </ul>
+         </div>
+            
+<div id="slider">
+    Agitated<input class="bar" type="range" id="rangeinput" min="1" max="10" value="5" onchange="rangevalue.value=value"/>
+    <span class="highlight"></span>
+    <output id="rangevalue"></output>Calm
+</div>
+
+ <div id="slider">
+    Happy<input class="bar" type="range" id="rangeinput1" min="1" max="10" value="5" onchange="rangevalue.value=value"/>
+    <span class="highlight"></span>
+    <output id="rangevalue"></output>Sad
+</div>
+ <div id="slider">
+    Tired<input class="bar" type="range" id="rangeinput2" min="1" max="10" value="5" onchange="rangevalue.value=value"/>
+    <span class="highlight"></span>
+    <output id="rangevalue"></output>Wide Awake
+</div>
+            <div id="slider">
+    Scared<input class="bar" type="range" id="rangeinput3" min="1" max="10" value="5" onchange="rangevalue.value=value"/>
+    <span class="highlight"></span>
+    <output id="rangevalue"></output>Fearless
+</div>
+     
+  
+            
+            <table id="demo">
+        <tr>
+            <td>no content  </td><td>no content  </td><td>no content  </td><td>no content  </td><td>no content  </td>
+        </tr>
+        <tr>
+            <td>no content </td><td>no content </td><td>no content </td><td>no content  </td><td>no content  </td>
+        </tr>
+    </table>
+
+<script >
+    
+         var rangeInput = document.getElementById("rangeinput");
+
+rangeInput.addEventListener('mouseup', function() {
+     
+    if (this.value > 0 && this.value < 6) {
+        displayCD();
+    } 
+    else {
+        displayCD2();
+    }
+});
+
+
+function displayCD(i) {
+    var xmlhttp = new XMLHttpRequest();
+    xmlhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            displayCalm(this, i);
+        }
+    };
+    xmlhttp.open("GET", "MovieList2.xml", true);
+    xmlhttp.send();
+}
+
+function displayCalm(xml) {
+  var i;
+      var xmlDoc = xml.responseXML;
+     var img = document.createElement("img").width="150";
+      var table="";
+      var x = xmlDoc.getElementsByTagName("programme");
+      
+for (i = 0; i <=4; i++) { 
+    var img = x[i].getElementsByTagName("image")[0].childNodes[0].nodeValue;
+    table += "<tr><td><img src='"+img+"'></td></tr><tr><td>" +
+    x[i].getElementsByTagName("name")[0].childNodes[0].nodeValue +
+    
+    "</td></tr>";
+  }
+  document.getElementById("demo").innerHTML = table;
+}
+
+function displayCD2(i) {
+    var xmlhttp = new XMLHttpRequest();
+    xmlhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            displayStress(this, i);
+        }
+    };
+    xmlhttp.open("GET", "MovieList2.xml", true);
+    xmlhttp.send();
+}
+
+function displayStress(xml) {
+      var i;
+      var xmlDoc = xml.responseXML;
+      var img = document.createElement("img").width="150";
+      var table="<table>";
+      var x = xmlDoc.getElementsByTagName("programme");
+      
+      for (i = 5; i <=9; i++) { 
+       var img = x[i].getElementsByTagName("image")[0].childNodes[0].nodeValue;
+    table += "<tr><td><img src='"+img+"'></td></tr><tr><td>" +
+    x[i].getElementsByTagName("name")[0].childNodes[0].nodeValue +
+    
+   "</td></tr>";
+  }
+  document.getElementById("demo").innerHTML = table;
+}
+
+var rangeInput1 = document.getElementById("rangeinput1");
+
+rangeInput1.addEventListener('mouseup', function() {
+     
+    if (this.value > 0 && this.value < 6) {
+        displayCD3();
+    } 
+    else {
+        displayCD4();
+    }
+});
+
+function displayCD3(i) {
+    var xmlhttp = new XMLHttpRequest();
+    xmlhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            displayHappy(this, i);
+        }
+    };
+    xmlhttp.open("GET", "MovieList2.xml", true);
+    xmlhttp.send();
+}
+
+function displayHappy(xml) {
+  var i;
+      var xmlDoc = xml.responseXML;
+     var img = document.createElement("img").width="150";
+      var table="";
+      var x = xmlDoc.getElementsByTagName("programme");
+      
+for (i = 10; i <=14; i++) { 
+    var img = x[i].getElementsByTagName("image")[0].childNodes[0].nodeValue;
+    table += "<tr><td><img src='"+img+"'></td></tr><tr><td>" +
+    x[i].getElementsByTagName("name")[0].childNodes[0].nodeValue +
+    
+    "</td></tr>";
+  }
+  document.getElementById("demo").innerHTML = table;
+}
+
+function displayCD4(i) {
+    var xmlhttp = new XMLHttpRequest();
+    xmlhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            displaySad(this, i);
+        }
+    };
+    xmlhttp.open("GET", "MovieList2.xml", true);
+    xmlhttp.send();
+}
+
+function displaySad(xml) {
+  var i;
+      var xmlDoc = xml.responseXML;
+     var img = document.createElement("img").width="150";
+      var table="";
+      var x = xmlDoc.getElementsByTagName("programme");
+      
+for (i = 15; i <=19; i++) { 
+    var img = x[i].getElementsByTagName("image")[0].childNodes[0].nodeValue;
+    table += "<tr><td><img src='"+img+"'></td></tr><tr><td>" +
+    x[i].getElementsByTagName("name")[0].childNodes[0].nodeValue +
+    
+    "</td></tr>";
+  }
+  document.getElementById("demo").innerHTML = table;
+}
+
+
+var rangeInput2 = document.getElementById("rangeinput2");
+
+rangeInput2.addEventListener('mouseup', function() {
+     
+    if (this.value > 0 && this.value < 6) {
+        displayCD5();
+    } 
+    else {
+        displayCD6();
+    }
+});
+
+
+function displayCD5(i) {
+    var xmlhttp = new XMLHttpRequest();
+    xmlhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            displayTired(this, i);
+        }
+    };
+    xmlhttp.open("GET", "MovieList2.xml", true);
+    xmlhttp.send();
+}
+
+function displayTired(xml) {
+  var i;
+      var xmlDoc = xml.responseXML;
+     var img = document.createElement("img").width="150";
+      var table="";
+      var x = xmlDoc.getElementsByTagName("programme");
+      
+for (i = 20; i <=24; i++) { 
+    var img = x[i].getElementsByTagName("image")[0].childNodes[0].nodeValue;
+    table += "<tr><td><img src='"+img+"'></td></tr><tr><td>" +
+    x[i].getElementsByTagName("name")[0].childNodes[0].nodeValue +
+    
+    "</td></tr>";
+  }
+  document.getElementById("demo").innerHTML = table;
+}
+
+
+function displayCD6(i) {
+    var xmlhttp = new XMLHttpRequest();
+    xmlhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            displayWideAwake(this, i);
+        }
+    };
+    xmlhttp.open("GET", "MovieList2.xml", true);
+    xmlhttp.send();
+}
+
+function displayWideAwake(xml) {
+  var i;
+      var xmlDoc = xml.responseXML;
+     var img = document.createElement("img").width="150";
+      var table="";
+      var x = xmlDoc.getElementsByTagName("programme");
+      
+for (i = 25; i <=29; i++) { 
+    var img = x[i].getElementsByTagName("image")[0].childNodes[0].nodeValue;
+    table += "<tr><td><img src='"+img+"'></td></tr><tr><td>" +
+    x[i].getElementsByTagName("name")[0].childNodes[0].nodeValue +
+    
+    "</td></tr>";
+  }
+  document.getElementById("demo").innerHTML = table;
+}
+
+
+var rangeInput3 = document.getElementById("rangeinput3");
+
+rangeInput3.addEventListener('mouseup', function() {
+     
+    if (this.value > 0 && this.value < 6) {
+        displayCD7();
+    } 
+    else {
+        displayCD8();
+    }
+});
+
+
+function displayCD7(i) {
+    var xmlhttp = new XMLHttpRequest();
+    xmlhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            displayScared(this, i);
+        }
+    };
+    xmlhttp.open("GET", "MovieList2.xml", true);
+    xmlhttp.send();
+}
+
+function displayScared(xml) {
+  var i;
+      var xmlDoc = xml.responseXML;
+     var img = document.createElement("img").width="150";
+      var table="";
+      var x = xmlDoc.getElementsByTagName("programme");
+      
+for (i = 30; i <=34; i++) { 
+    var img = x[i].getElementsByTagName("image")[0].childNodes[0].nodeValue;
+    table += "<tr><td><img src='"+img+"'></td></tr><tr><td>" +
+    x[i].getElementsByTagName("name")[0].childNodes[0].nodeValue +
+    
+   "</td></tr>";
+  }
+  document.getElementById("demo").innerHTML = table;
+}
+
+
+function displayCD8(i) {
+    var xmlhttp = new XMLHttpRequest();
+    xmlhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            displayFearless(this, i);
+        }
+    };
+    xmlhttp.open("GET", "MovieList2.xml", true);
+    xmlhttp.send();
+}
+
+function displayFearless(xml) {
+  var i;
+      var xmlDoc = xml.responseXML;
+     var img = document.createElement("img").width="150";
+      var table="";
+      var x = xmlDoc.getElementsByTagName("programme");
+      
+for (i = 35; i <=39; i++) { 
+    var img = x[i].getElementsByTagName("image")[0].childNodes[0].nodeValue;
+    table += "<tr><td><img src='"+img+"'></td></tr><tr><td>" +
+    x[i].getElementsByTagName("name")[0].childNodes[0].nodeValue +
+    
+   "</td></tr>";
+  }
+  document.getElementById("demo").innerHTML = table;
+}
+
+</script>
+
+    </body>
+</html>
+
